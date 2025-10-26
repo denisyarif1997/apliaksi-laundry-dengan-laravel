@@ -29,17 +29,24 @@ class Sidebar extends Component
         $PermissionCount = Permission::count();
         view()->share('PermissionCount',$PermissionCount);
         
-        $CategoryCount = Category::count();
-        view()->share('CategoryCount',$CategoryCount);
+        // $CategoryCount = Category::count();
+        // view()->share('CategoryCount',$CategoryCount);
         
-        $SubCategoryCount = SubCategory::count();
-        view()->share('SubCategoryCount',$SubCategoryCount);
+        // $SubCategoryCount = SubCategory::count();
+        // view()->share('SubCategoryCount',$SubCategoryCount);
         
-        $CollectionCount = Collection::count();
-        view()->share('CollectionCount',$CollectionCount);
+        // $CollectionCount = Collection::count();
+        // view()->share('CollectionCount',$CollectionCount);
         
-        $ProductCount = Product::count();
-        view()->share('ProductCount',$ProductCount);
+        // $ProductCount = Product::count();
+        // view()->share('ProductCount',$ProductCount);
+
+        $CustomerCount = \App\Models\CustomerModel::count();
+        view()->share('CustomerCount',$CustomerCount);
+        $ServicesCount = \App\Models\ServicesModel::count();
+        view()->share('ServicesCount',$ServicesCount);
+        $TransactionCount = \App\Models\TransactionModel::count();
+        view()->share('TransactionCount',$TransactionCount);
     }
 
     /**

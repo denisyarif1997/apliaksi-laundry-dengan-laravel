@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## AdminLTE in laravel-10
 <p align="center"><a href="https://github.com/ZalaNihir/adminlte-laravel10" target="_blank"><img src="ready-made-admin-lte-10.png" width="800" alt="Laravel-10 AdminLTE"></a></p>
 
@@ -159,3 +160,7 @@ Check My Other Project
 
 
 <div width="100%" align="center"><a href="https://github.com/ZalaNihir/country-state-city-package/" align="left"><img align="left" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=ZalaNihir&repo=country-state-city-package&title_color=ffffff&text_color=ffffff&icon_color=0891b2&bg_color=000000&hide_border=true&locale=en" /></a>
+=======
+# apliaksi-laundry-dengan-laravel
+aplikasi laundry dengan laravel
+>>>>>>> ea841994b37e9a06110f735352f91bfbd49a9cac

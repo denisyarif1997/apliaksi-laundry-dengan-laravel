@@ -4,6 +4,10 @@ use App\Http\Controllers\LoginWithOTPController;
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TransactionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +20,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/', function () {
-    $readmePath = base_path('README.md');
-
-    return view('welcome', [
-        'readmeContent' => Str::markdown(file_get_contents($readmePath)),
-    ]);
+    return redirect()->route('login');
 });
 // Login with OTP Routes
 Route::prefix('/otp')->middleware('guest')->name('otp.')->controller(LoginWithOTPController::class)->group(function(){
@@ -47,6 +47,19 @@ Route::prefix('oauth/')->group(function(){
         Route::get('/callback',[SocialiteController::class,'HandleFaceBookCallBack'])->name('callback');
     });
 });
+// pembayaran
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
+    // ...route transaksi sebelumnya
+    Route::get('/payment/{transaction}', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/payment/{transaction}', [PaymentController::class, 'store'])->name('payment.store');
+    Route::get('/payment/{payment}/edit', [PaymentController::class, 'edit'])->name('payment.edit');
+    Route::put('/payment/{payment}', [PaymentController::class, 'update'])->name('payment.update');
+
+});
+// update diambil
+Route::put('/admin/transaction/{id}/update-status', [TransactionController::class, 'updateStatusTransaction'])
+    ->name('admin.transaction.updateStatus');
+
 
 
 

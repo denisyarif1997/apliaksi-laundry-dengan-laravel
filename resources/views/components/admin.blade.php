@@ -1,9 +1,6 @@
 <!--
 /*!
- *   AdminLTE With Laravel
- *   Author: Nihir Zala
- *   Website: https://nihirz.netlify.app
- *   License: Open source - MIT <https://opensource.org/licenses/MIT>
+ *  
  */
 -->
 
@@ -12,7 +9,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1">
     <title> @yield('title', 'Admin') | {{ config('app.name') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -103,8 +100,13 @@
     </div>
     <!-- ./wrapper -->
     <footer class="main-footer">
-        <strong>Copyright © 2023-{{ date('Y') }} <a href="nihirz.netlify.app">Zala
-                Nihir</a>.</strong> All rights reserved.
+        <strong>
+    Copyright © 2025-{{ date('Y') }} 
+    <a href="https://denisyarif1997.github.io/Portfolio/" target="_blank">
+        Deni Sarifudin
+    </a>.
+</strong>
+
     </footer>
     <!-- ./wrapper -->
 

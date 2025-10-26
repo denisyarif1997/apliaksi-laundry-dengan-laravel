@@ -49,7 +49,7 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <div class="social-auth-links text-center mb-3">
+                {{-- <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
                     <a href="{{ route('facebook.login') }}" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
@@ -60,7 +60,7 @@
                     <a href="{{ route('github.login') }}" class="btn btn-block btn-dark">
                         <i class="fab fa-github mr-2"></i> Sign in using Github
                     </a>
-                </div>
+                </div> --}}
                 <p class="mb-1">
                     <a href="{{ route('password.request') }}">I forgot my password</a>
                 </p>
