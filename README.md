@@ -1,166 +1,233 @@
-<<<<<<< HEAD
-## AdminLTE in laravel-10
-<p align="center"><a href="https://github.com/ZalaNihir/adminlte-laravel10" target="_blank"><img src="ready-made-admin-lte-10.png" width="800" alt="Laravel-10 AdminLTE"></a></p>
+# 🧺 Aplikasi Laundry dengan Laravel
 
-## Light-Dark Mode Using Bootstrap
+Aplikasi manajemen laundry berbasis web menggunakan Laravel untuk mengelola data customer, transaksi, dan operasional laundry.
 
-<p align="center"><a href="https://github.com/ZalaNihir/adminlte-laravel10" target="_blank"><img src="light-dark-mode.png" width="800" alt="Bootstrap AdminLTE in LAravel"></a></p>
+## ✨ Fitur Utama
 
+- 📋 Manajemen Customer
+- 💰 Transaksi Laundry
+- 📊 Dashboard & Laporan
+- 👥 Multi-user Management
+- 🔐 Autentikasi & Autorisasi
+- 📱 Responsive Design
 
-## About This Projects
+## 🛠️ Teknologi
 
-This project is made in Laravel version 10. In this project, I used an Admin LTE with a breeze installation. Users do have not to worry about assets & folder paths for the admin side. Created for basic e-commerce project admin.Added the basic modules. Don't forget to give star to this repository ⭐.
+- **Framework:** Laravel 10.x
+- **Database:** MySQL
+- **Frontend:** Bootstrap 5 / AdminLTE
+- **PHP Version:** 8.1+
 
-[![GitHub stars](https://img.shields.io/github/stars/ZalaNihir/adminlte-laravel10.svg?style=social&label=Star)](https://github.com/ZalaNihir/adminlte-laravel10)
-[![GitHub forks](https://img.shields.io/github/forks/ZalaNihir/adminlte-laravel10.svg?style=social&label=Fork)](https://github.com/ZalaNihir/adminlte-laravel10)
-[![GitHub watchers](https://img.shields.io/github/watchers/ZalaNihir/adminlte-laravel10.svg?style=social&label=Watch)](https://github.com/ZalaNihir/adminlte-laravel10)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## 📋 Persyaratan Sistem
 
+Pastikan sistem Anda memiliki:
 
+- PHP >= 8.1
+- Composer
+- MySQL >= 5.7 atau MariaDB
+- Node.js & NPM (untuk asset compilation)
+- Web Server (Apache/Nginx)
 
-## Installation & usage
-- For Install you have to clone this repo or you can fire this command as well.
+## 🚀 Cara Instalasi
 
-```php
-git clone https://github.com/ZalaNihir/adminlte-laravel10.git
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel.git
+cd apliaksi-laundry-dengan-laravel
 ```
 
-- Go into folder
+### 2. Install Dependencies
 
-```php
-cd adminlte-laravel10
+```bash
+composer install
+npm install
 ```
 
-- After the installation you have to update the vendor folder you can update the vendor folder using this command.
+### 3. Setup Environment
 
-```php
-composer update
-```
-
-- After the updation you have to create the ```.env``` file via this command.
-
-```php
+```bash
 cp .env.example .env
 ```
 
-- Now you have to generate the product key.
+Edit file `.env` dan sesuaikan konfigurasi database:
 
-```php
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laundry_db
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+> **📧 Untuk Akses Database:**  
+> Silahkan hubungi: **denisyarif196@gmail.com**
+
+### 4. Generate Application Key
+
+```bash
 php artisan key:generate
 ```
 
-- Now migrate the tables & seed the database.
+### 5. Jalankan Migration & Seeder
 
-```php
-php artisan migrate --seed
+```bash
+php artisan migrate
+php artisan db:seed
 ```
 
-- We are done here. Now you have to just serve your project.
+### 6. Compile Assets
 
-```php
+```bash
+npm run dev
+```
+
+Atau untuk production:
+
+```bash
+npm run build
+```
+
+### 7. Create Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 8. Jalankan Aplikasi
+
+```bash
 php artisan serve
 ```
 
-- This is the updated code of admin.
+Aplikasi akan berjalan di: `http://localhost:8000`
 
-To get the access of admin side there is credentials bellow
+## 🔑 Default Login
 
-- Admin
+Setelah seeder dijalankan, gunakan kredensial berikut:
 
-email: ```testadmin@gmail.com```
-password: ```p$ssw#rd```
+**Admin:**
+- Email: `admin@laundry.com`
+- Password: `password`
 
-- User
+**Kasir:**
+- Email: `kasir@laundry.com`
+- Password: `password`
 
-email: ```testuser@gmail.com```
-password: ```p$ssw#rd```
+> ⚠️ **Penting:** Segera ubah password default setelah login pertama!
 
-- Vendor
+## 📁 Struktur Project
 
-email: ```testvendor@gmail.com```
-password: ```p$ssw#rd```
-
-
-# Update
-
-- Added the Light/Dark mode in profile section at top nav.
-
-- Added the Category module.
-
-- Added the Subcategory module.
-
-- Added the product module which has basic detail & takes multiple images.
-
-- Added the Role Module.
-
-- Added the permission Module.
-
-- Added the collection Module for PDFs.
-
-- Added the Country, State & City seeder with the relationship
-
-- if you want to use the admin side but you have no idea about components & how here things work. so that you just have to create a file & put your code.
-
-- I added the functionality to compress the image size & convert it into webp format in the ```ProductController```.
-
-# Toast
-
-- Added the toastr which has 4 classes success, info, warning & error. you can use it own it.
-
-```php
-<x-admin>
-    {{ 'Put your blade code here' }}
-</x-admin>
+```
+├── app/
+│   ├── Http/Controllers/
+│   ├── Models/
+│   └── ...
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── public/
+├── resources/
+│   ├── views/
+│   └── ...
+├── routes/
+│   └── web.php
+└── ...
 ```
 
-- For the page title use a section method Like this.
+## 🔧 Konfigurasi Tambahan
 
-```php
-    @section('title')
-        {{'Your Titlte'}}
-    @endsection
+### Queue Worker (Opsional)
+
+Jika menggunakan queue untuk email/notifikasi:
+
+```bash
+php artisan queue:work
 ```
 
-# Alerts
+### Scheduler (Opsional)
 
-- I added the alerts. You just have to call like this.
+Tambahkan ke crontab untuk scheduled tasks:
 
-```php
-->with('success', 'Success message');
-->with('danger', 'danger message');
-->with('info', 'info message');
-->with('dark', 'dark message');
-->with('warning', 'warning message');
-->with('light', 'light message');
+```bash
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-## Security Vulnerabilities
+## 📝 Penggunaan
 
-If you discover a security vulnerability within this project, please send an e-mail to Nihir Zala via [testnihir@gmail.com](mailto:testnihir@gmail.com). All security vulnerabilities will be promptly addressed.If you find any issue or bug you can mail me.
+### Modul Customer
 
-## License
+1. Login ke aplikasi
+2. Navigate ke menu **Customer**
+3. Klik tombol **New** untuk menambah customer baru
+4. Isi form dengan data customer
+5. Klik **Save**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Fitur Pagination
 
-## Friendly Note
+- Data customer ditampilkan 20 per halaman
+- Gunakan tombol navigasi untuk berpindah halaman
+- Fitur search tersedia untuk mencari data spesifik
 
-- if you have any query about this package face some error or need support to update simply mail me<a href="mailto:testnihir@gmail.com"> here</a>.
-- Sorry for my English & this type of short instruction. I'm learning if you are an expert please help me to improve.
+## 🐛 Troubleshooting
 
-# Connect with me
-[![Twitter URL](https://img.shields.io/badge/Follow%20%40NihirZala-1DA1F2?style=social&logo=twitter)](https://twitter.com/NihirZala)
+### Error: "Specified key was too long"
 
-[![LinkedIn URL](https://img.shields.io/badge/Connect%20%40nihirzala-0077B5?style=social&logo=linkedin)](https://www.linkedin.com/in/nihirzala/)
+Tambahkan di `AppServiceProvider.php`:
 
-[![Instagram URL](https://img.shields.io/badge/Follow%20%40inihirzala-ff69b4?style=social&logo=instagram)](https://www.instagram.com/inihirzala/)
+```php
+use Illuminate\Support\Facades\Schema;
 
-# Other Projects
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+```
 
-Check My Other Project
+### Error: Permission Denied
 
+```bash
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+```
 
-<div width="100%" align="center"><a href="https://github.com/ZalaNihir/country-state-city-package/" align="left"><img align="left" width="45%" src="https://github-readme-stats.vercel.app/api/pin/?username=ZalaNihir&repo=country-state-city-package&title_color=ffffff&text_color=ffffff&icon_color=0891b2&bg_color=000000&hide_border=true&locale=en" /></a>
-=======
-# apliaksi-laundry-dengan-laravel
-aplikasi laundry dengan laravel
->>>>>>> ea841994b37e9a06110f735352f91bfbd49a9cac
+### Error: Class not found
+
+```bash
+composer dump-autoload
+php artisan clear-compiled
+php artisan config:clear
+php artisan cache:clear
+```
+
+## 🤝 Kontribusi
+
+Kontribusi selalu welcome! Silakan:
+
+1. Fork repository ini
+2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## 📞 Kontak
+
+**Developer:** Denis Yarif  
+**Email:** denisyarif196@gmail.com  
+**Repository:** [https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel](https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel)
+
+## 📄 Lisensi
+
+Project ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail.
+
+## 🙏 Acknowledgments
+
+- Laravel Framework
+- AdminLTE Template
+- Bootstrap
+- Komunitas Open Source
+
+---
+
+⭐ Jika project ini bermanfaat, jangan lupa berikan **star** di GitHub!
