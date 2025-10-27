@@ -1,233 +1,74 @@
-# 🧺 Aplikasi Laundry dengan Laravel
+Aplikasi Laundry (Laravel)
 
-Aplikasi manajemen laundry berbasis web menggunakan Laravel untuk mengelola data customer, transaksi, dan operasional laundry.
+Aplikasi web sederhana untuk manajemen laundry: customer, transaksi, laporan, dan multi-user.
 
-## ✨ Fitur Utama
+Teknologi
 
-- 📋 Manajemen Customer
-- 💰 Transaksi Laundry
-- 📊 Dashboard & Laporan
-- 👥 Multi-user Management
-- 🔐 Autentikasi & Autorisasi
-- 📱 Responsive Design
+Laravel 10.x, PHP ≥ 8.1
 
-## 🛠️ Teknologi
+MySQL / MariaDB
 
-- **Framework:** Laravel 10.x
-- **Database:** MySQL
-- **Frontend:** Bootstrap 5 / AdminLTE
-- **PHP Version:** 8.1+
+Frontend: Bootstrap 5 / AdminLTE
 
-## 📋 Persyaratan Sistem
+Node.js & NPM (untuk assets)
 
-Pastikan sistem Anda memiliki:
-
-- PHP >= 8.1
-- Composer
-- MySQL >= 5.7 atau MariaDB
-- Node.js & NPM (untuk asset compilation)
-- Web Server (Apache/Nginx)
-
-## 🚀 Cara Instalasi
-
-### 1. Clone Repository
-
-```bash
+Instalasi singkat
 git clone https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel.git
 cd apliaksi-laundry-dengan-laravel
-```
-
-### 2. Install Dependencies
-
-```bash
 composer install
 npm install
-```
-
-### 3. Setup Environment
-
-```bash
 cp .env.example .env
-```
-
-Edit file `.env` dan sesuaikan konfigurasi database:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laundry_db
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-```
-
-> **📧 Untuk Akses Database:**  
-> Silahkan hubungi: **denisyarif196@gmail.com**
-
-### 4. Generate Application Key
-
-```bash
+# edit .env -> DB_*
 php artisan key:generate
-```
-
-### 5. Jalankan Migration & Seeder
-
-```bash
-php artisan migrate
-php artisan db:seed
-```
-
-### 6. Compile Assets
-
-```bash
-npm run dev
-```
-
-Atau untuk production:
-
-```bash
-npm run build
-```
-
-### 7. Create Storage Link
-
-```bash
+php artisan migrate --seed
 php artisan storage:link
-```
-
-### 8. Jalankan Aplikasi
-
-```bash
+npm run dev        # atau npm run build untuk production
 php artisan serve
-```
 
-Aplikasi akan berjalan di: `http://localhost:8000`
 
-## 🔑 Default Login
+Akses: http://localhost:8000
 
-Setelah seeder dijalankan, gunakan kredensial berikut:
+Default akun
 
-**Admin:**
-- Email: `admin@laundry.com`
-- Password: `password`
+Admin — admin@laundry.com
+ / password
 
-**Kasir:**
-- Email: `kasir@laundry.com`
-- Password: `password`
+Kasir — kasir@laundry.com
+ / password
 
-> ⚠️ **Penting:** Segera ubah password default setelah login pertama!
+Ganti password setelah login pertama.
 
-## 📁 Struktur Project
+Fitur utama
 
-```
-├── app/
-│   ├── Http/Controllers/
-│   ├── Models/
-│   └── ...
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── public/
-├── resources/
-│   ├── views/
-│   └── ...
-├── routes/
-│   └── web.php
-└── ...
-```
+Manajemen Customer
 
-## 🔧 Konfigurasi Tambahan
+Transaksi laundry (create / bayar / status)
 
-### Queue Worker (Opsional)
+Dashboard & laporan
 
-Jika menggunakan queue untuk email/notifikasi:
+Hak akses (Admin / Kasir)
 
-```bash
-php artisan queue:work
-```
+Responsive (Bootstrap / AdminLTE)
 
-### Scheduler (Opsional)
+Struktur singkat project
+app/       // controllers, models
+resources/ // views (Blade)
+routes/    // web.php
+database/  // migrations & seeders
+public/    // assets
 
-Tambahkan ke crontab untuk scheduled tasks:
+Troubleshoot cepat
 
-```bash
-* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
-```
+Specified key was too long → tambahkan Schema::defaultStringLength(191); di AppServiceProvider::boot.
 
-## 📝 Penggunaan
+Permission → chmod -R 775 storage bootstrap/cache
 
-### Modul Customer
+Composer autoload → composer dump-autoload && php artisan config:clear && php artisan cache:clear
 
-1. Login ke aplikasi
-2. Navigate ke menu **Customer**
-3. Klik tombol **New** untuk menambah customer baru
-4. Isi form dengan data customer
-5. Klik **Save**
+Lisensi & kontribusi
 
-### Fitur Pagination
+MIT — kontribusi welcome (fork → branch → PR).
 
-- Data customer ditampilkan 20 per halaman
-- Gunakan tombol navigasi untuk berpindah halaman
-- Fitur search tersedia untuk mencari data spesifik
+Kontak: denisyarif196@gmail.com
 
-## 🐛 Troubleshooting
-
-### Error: "Specified key was too long"
-
-Tambahkan di `AppServiceProvider.php`:
-
-```php
-use Illuminate\Support\Facades\Schema;
-
-public function boot()
-{
-    Schema::defaultStringLength(191);
-}
-```
-
-### Error: Permission Denied
-
-```bash
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
-```
-
-### Error: Class not found
-
-```bash
-composer dump-autoload
-php artisan clear-compiled
-php artisan config:clear
-php artisan cache:clear
-```
-
-## 🤝 Kontribusi
-
-Kontribusi selalu welcome! Silakan:
-
-1. Fork repository ini
-2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
-
-## 📞 Kontak
-
-**Developer:** Denis Yarif  
-**Email:** denisyarif196@gmail.com  
-**Repository:** [https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel](https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel)
-
-## 📄 Lisensi
-
-Project ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail.
-
-## 🙏 Acknowledgments
-
-- Laravel Framework
-- AdminLTE Template
-- Bootstrap
-- Komunitas Open Source
-
----
-
-⭐ Jika project ini bermanfaat, jangan lupa berikan **star** di GitHub!
+Repo: https://github.com/denisyarif1997/apliaksi-laundry-dengan-laravel
