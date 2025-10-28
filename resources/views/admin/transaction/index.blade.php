@@ -13,6 +13,7 @@
                     <tr>
                         <th>#</th>
                         <th>Kode Transaksi</th>
+                        {{-- <th>Layanan</th> --}}
                         <th>Customer</th>
                         <TH>No Telepon</TH>
                         <th>Order Masuk</th>
@@ -27,8 +28,38 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $trx->kode_transaksi }}</td>
+                            {{-- <td>{{ $trx->services->service_id ?? '-' }}</td> --}}
                             <td>{{ $trx->customer->nama ?? '-' }}</td>
-                            <td>{{ $trx->customer->no_telp ?? '-' }}</td>
+                            <td>
+                                @if($trx->customer && $trx->customer->no_telp)
+                                    @php
+                                        // Bersihkan nomor dari karakter non-numerik
+                                        $cleanNumber = preg_replace('/[^0-9]/', '', $trx->customer->no_telp);
+                                        
+                                        // Jika diawali 0, ganti dengan 62
+                                        if (substr($cleanNumber, 0, 1) === '0') {
+                                            $whatsappNumber = '62' . substr($cleanNumber, 1);
+                                        } 
+                                        // Jika sudah diawali 62, biarkan
+                                        elseif (substr($cleanNumber, 0, 2) === '62') {
+                                            $whatsappNumber = $cleanNumber;
+                                        } 
+                                        // Jika format lain, tambahkan 62 di depan
+                                        else {
+                                            $whatsappNumber = '62' . $cleanNumber;
+                                        }
+                                    @endphp
+                                    {{ $trx->customer->no_telp }}
+                                    <a href="https://wa.me/{{ $whatsappNumber }}" 
+                                       target="_blank" 
+                                       class="btn btn-success btn-sm ms-1"
+                                       title="Chat WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td>{{ $trx->tanggal_masuk }}</td>
                             <td>
                                 <span class="badge 

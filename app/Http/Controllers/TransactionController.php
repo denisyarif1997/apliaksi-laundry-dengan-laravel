@@ -20,6 +20,8 @@ class TransactionController extends Controller
     {
         $transactions = TransactionModel::with('customer')->orderBy('id', 'desc')->get();
         $payments = PaymentModel::all();
+        $services = TransactionDetailModel::all();
+        // dd($services);
         return view('admin.transaction.index', compact('transactions'));
     }
 

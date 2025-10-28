@@ -1,4 +1,4 @@
-<nav class="mt-1">
+<nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item">
@@ -50,7 +50,7 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.services.index') }}" class="nav-link {{ Route::is('admin.services.*') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Layanan <span class="badge badge-primary right">{{ $ServicesCount }}</span></p>
+                            <p>Services <span class="badge badge-primary right">{{ $ServicesCount }}</span></p>
                         </a>
                     </li>
                 </ul>
