@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDelete;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class MesinCuciModel extends Model
 {
     use HasFactory;
-    use SoftDelete;
+    use SoftDeletes;
 
     protected $table = 'ms_mesin_laundry';
     protected $dates = ['deleted_at'];

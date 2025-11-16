@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\mesinCuciController;
 
 
 
@@ -34,6 +35,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
         Route::resource('services',ServicesController::class);
         Route::resource('transaction',TransactionController::class);
         Route::resource('item',ItemController::class);
+        Route::resource('mesincuci',MesinCuciController::class);
         Route::get('/get/subcategory',[ProductController::class,'getsubcategory'])->name('getsubcategory');
         Route::get('/remove-external-img/{id}',[ProductController::class,'removeImage'])->name('remove.image');
     });

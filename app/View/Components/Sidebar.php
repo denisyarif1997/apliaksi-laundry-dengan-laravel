@@ -49,6 +49,8 @@ class Sidebar extends Component
         view()->share('TransactionCount',$TransactionCount);
         $ItemCount = \App\Models\ItemModel::count();
         view()->share('ItemCount',$ItemCount);
+        $MesinCount = \App\Models\MesinCuciModel::count();
+        view()->share('MesinCount', $MesinCount);
     }
 
     /**
