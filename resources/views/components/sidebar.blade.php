@@ -10,8 +10,8 @@
 
         @role('admin')
             {{-- Master Data submenu --}}
-            <li class="nav-item has-treeview {{ (Route::is('admin.user.*') || Route::is('admin.role.*') || Route::is('admin.permission.*') || Route::is('admin.customer.*') || Route::is('admin.services.*')) ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link {{ (Route::is('admin.user.*') || Route::is('admin.role.*') || Route::is('admin.permission.*') || Route::is('admin.customer.*') || Route::is('admin.services.*')) ? 'active' : '' }}">
+            <li class="nav-item has-treeview {{ (Route::is('admin.user.*') || Route::is('admin.role.*') || Route::is('admin.permission.*') || Route::is('admin.item.*') || Route::is('admin.customer.*') || Route::is('admin.services.*')) ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link {{ (Route::is('admin.user.*') || Route::is('admin.role.*') || Route::is('admin.permission.*') || Route::is('admin.item.*') || Route::is('admin.customer.*') || Route::is('admin.services.*')) ? 'active' : '' }}">
                     <i class="nav-icon fas fa-layer-group"></i>
                     <p>
                         Master Data
@@ -41,6 +41,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('admin.item.index') }}" class="nav-link {{ Route::is('admin.item.*') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Items <span class="badge badge-warning right">{{ $ItemCount }}</span></p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('admin.customer.index') }}" class="nav-link {{ Route::is('admin.customer.*') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Customers <span class="badge badge-warning right">{{ $CustomerCount }}</span></p>
@@ -56,7 +63,7 @@
                 </ul>
             </li>
 
-            {{-- Transactions submenu --}}
+            {{-- Transactions submenu --}}  
             <li class="nav-item has-treeview {{ Route::is('admin.transaction.*') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link {{ Route::is('admin.transaction.*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-exchange-alt"></i>

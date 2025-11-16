@@ -11,6 +11,7 @@ use App\Http\Controllers\SubCateoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ItemController;
 
 
 
@@ -32,6 +33,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
         Route::resource('customer',CustomerController::class);
         Route::resource('services',ServicesController::class);
         Route::resource('transaction',TransactionController::class);
+        Route::resource('item',ItemController::class);
         Route::get('/get/subcategory',[ProductController::class,'getsubcategory'])->name('getsubcategory');
         Route::get('/remove-external-img/{id}',[ProductController::class,'removeImage'])->name('remove.image');
     });
@@ -54,6 +56,7 @@ Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(fu
         Route::resource('customer',CustomerController::class);
         Route::resource('services',ServicesController::class);
         Route::resource('transaction',TransactionController::class);
+        Route::resource('item',ItemController::class);
         Route::get('/get/subcategory',[ProductController::class,'getsubcategory'])->name('getsubcategory');
         Route::get('/remove-external-img/{id}',[ProductController::class,'removeImage'])->name('remove.image');
     });

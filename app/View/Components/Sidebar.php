@@ -47,6 +47,8 @@ class Sidebar extends Component
         view()->share('ServicesCount',$ServicesCount);
         $TransactionCount = \App\Models\TransactionModel::count();
         view()->share('TransactionCount',$TransactionCount);
+        $ItemCount = \App\Models\ItemModel::count();
+        view()->share('ItemCount',$ItemCount);
     }
 
     /**

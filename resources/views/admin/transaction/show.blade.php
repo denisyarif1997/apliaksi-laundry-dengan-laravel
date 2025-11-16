@@ -1,13 +1,13 @@
 <x-admin>
-    @section('title', 'Detail Transaksi')
-    <div class="container mt-3">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">Detail Transaksi</h3>
-                        <div>
-                            <a href="{{ route('admin.transaction.index') }}" class="btn btn-sm btn-secondary">Kembali</a>
+    @section('title','Detail Transaksi')
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Transaksi</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.transaction.index') }}" class="btn btn-info btn-sm">Back</a>
                             <button onclick="printDiv('printArea')" class="btn btn-sm btn-primary">
                                 <i class="bi bi-printer"></i> Print
                             </button>
