@@ -60,6 +60,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 Route::put('/admin/transaction/{id}/update-status', [TransactionController::class, 'updateStatusTransaction'])
     ->name('admin.transaction.updateStatus');
 
+    // update proses
+Route::put('/admin/transaction/{id}/update-status-proses', [TransactionController::class, 'updateStatusProses'])
+    ->name('admin.transaction.updateStatusProses');
+
+        // update selesai
+Route::put('/admin/transaction/{id}/update-status-selesai', [TransactionController::class, 'updateStatusSelesai'])
+    ->name('admin.transaction.updateStatusSelesai');
+
 
 
 

@@ -51,6 +51,14 @@ class Sidebar extends Component
         view()->share('ItemCount',$ItemCount);
         $MesinCount = \App\Models\MesinCuciModel::count();
         view()->share('MesinCount', $MesinCount);
+
+        // New Counts
+        $BackupCount = count(\Illuminate\Support\Facades\Storage::files('backups'));
+        view()->share('BackupCount', $BackupCount);
+        
+        // Report could be today's transaction count
+        $ReportCount = \App\Models\TransactionModel::whereDate('created_at', \Carbon\Carbon::today())->count();
+        view()->share('ReportCount', $ReportCount);
     }
 
     /**

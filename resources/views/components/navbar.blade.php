@@ -7,17 +7,12 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('logout') }}" class="d-inline">
                 @csrf
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <input type="submit" name="submit" value="Log out" class="btn btn-primary btn-sm">
-                    {{-- <a :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </a> --}}
-                </form>
+                <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="fas fa-sign-out-alt mr-1"></i> Log out
+                </button>
+            </form>
         </li>
     </ul>
 </nav>

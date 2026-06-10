@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\BelongsToCompany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class ItemModel extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToCompany;
     
     use SoftDeletes;
 

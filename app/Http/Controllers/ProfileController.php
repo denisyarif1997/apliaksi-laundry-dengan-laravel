@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Models\TransactionModel;
+use App\Models\CustomerModel;
+use App\Models\MesinCuciModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +18,55 @@ class ProfileController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        // Transaction Stats
+        $totalTransactions = TransactionModel::count();
+        $pendingTransactions = TransactionModel::where('status', 'pending')->count();
+        $processingTransactions = TransactionModel::where('status', 'proses')->count();
+        $diambilTransactions = TransactionModel::where('status', 'diambil')->orWhere('status', 'selesai')->count();
+        $completedTransactions = TransactionModel::where('status', 'selesai')->count(); // Just for chart or completeness
+
+        // Revenue Stats
+        $totalRevenue = TransactionModel::sum('total_harga');
+        $monthlyRevenue = TransactionModel::whereMonth('created_at', \Carbon\Carbon::now()->month)
+                            ->whereYear('created_at', \Carbon\Carbon::now()->year)
+                            ->sum('total_harga');
+
+        // Master Data Stats
+        $totalCustomers = CustomerModel::count();
+        $totalMachines = MesinCuciModel::count();
+        $activeMachines = MesinCuciModel::where('status', 1)->count(); // 1 = Active
+
+        // Recent Transactions
+        $recentTransactions = TransactionModel::with('customer')->latest()->take(5)->get();
+
+        // Chart Data (Last 6 months)
+        $monthlyData = TransactionModel::select(
+            \Illuminate\Support\Facades\DB::raw('sum(total_harga) as revenue'), 
+            \Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at,'%m') as month"),
+            \Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at,'%Y') as year")
+        )
+        ->groupBy('year', 'month')
+        ->orderBy('year', 'desc')
+        ->orderBy('month', 'desc')
+        ->take(6)
+        ->get()
+        ->reverse()
+        ->values();
+
+        return view('dashboard', compact(
+            'totalTransactions',
+            'pendingTransactions',
+            'processingTransactions',
+            'diambilTransactions',
+            'completedTransactions',
+            'totalRevenue',
+            'monthlyRevenue',
+            'totalCustomers',
+            'totalMachines',
+            'activeMachines',
+            'recentTransactions',
+            'monthlyData'
+        ));
     }
     /**
      * Display the user's profile form.

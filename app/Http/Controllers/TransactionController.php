@@ -16,23 +16,32 @@ class TransactionController extends Controller
     /**
      * Tampilkan daftar transaksi
      */
-    public function index()
-    {
-        $transactions = TransactionModel::with('customer')->orderBy('id', 'desc')->get();
-        $payments = PaymentModel::all();
-        $services = TransactionDetailModel::all();
-        // dd($services);
-        return view('admin.transaction.index', compact('transactions'));
-    }
+   public function index(Request $request)
+{
+    // Default filter: 1 bulan terakhir
+    $startDate = $request->get('start_date', \Carbon\Carbon::now()->subMonth()->format('Y-m-d'));
+    $endDate = $request->get('end_date', \Carbon\Carbon::now()->format('Y-m-d'));
+
+    $transactions = TransactionModel::with('customer')
+        ->whereBetween('tanggal_masuk', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+        ->orderBy('tanggal_masuk', 'desc')
+        ->paginate(10);
+
+    $payments = PaymentModel::all();
+    $services = TransactionDetailModel::all();
+
+    return view('admin.transaction.index', compact('transactions', 'payments', 'services', 'startDate', 'endDate'));
+}
+
 
     /**
      * Form tambah transaksi baru
      */
     public function create()
     {
-        $customers = CustomerModel::all();
+        // Don't load all customers, will use AJAX search instead
         $services = ServicesModel::all();
-        return view('admin.transaction.create', compact('customers', 'services'));
+        return view('admin.transaction.create', compact('services'));
     }
 
     /**
@@ -145,6 +154,14 @@ class TransactionController extends Controller
         return view('admin.transaction.show', compact('transaction'));
     }
 
+    public function print($id)
+    {
+        $transaction = TransactionModel::with(['customer', 'details.service', 'payments'])->findOrFail($id);
+        $company = \App\Models\Company::first(); // Master Laundry
+        
+        return view('admin.transaction.print', compact('transaction', 'company'));
+    }
+
     public function updateStatusTransaction($id)
 {
     $updateDiambil = DB::table('transactions')
@@ -157,9 +174,60 @@ class TransactionController extends Controller
             ->with('success', 'Status transaksi berhasil diubah menjadi "diambil".');
     } else {
         return redirect()->route('admin.transaction.index')
-            ->with('error', 'Gagal memperbarui status transaksi.');
+            ->with('error', 'Gagal memperbarui status transaksi, cek apakah sudah ada pembayaran?');
     }
 }
 
+    public function updateStatusProses($id)
+    {
+        $updateProses = DB::table('transactions')
+        ->where('id', $id)
+        ->whereIn ('status', ['pending'])
+        ->update(['status' => 'Proses']); 
+
+        if ($updateProses) {
+            return redirect()->route('admin.transaction.index')
+                        ->with('success', 'Status transaksi berhasil diubah menjadi "Proses".');
+                         } else {
+        return redirect()->route('admin.transaction.index')
+            ->with('error', 'Gagal memperbarui status transaksi');
+
+        }
+    }
+
+
+    // selesai proses
+    public function updateStatusSelesai($id)
+    {
+        $updateSelesai = DB::table('transactions')
+        ->where('id', $id)
+        ->whereIn ('status', ['diambil','lunas'])
+        ->update(['status' => 'selesai']); 
+
+        if ($updateSelesai) {
+            return redirect()->route('admin.transaction.index')
+                        ->with('success', 'Status transaksi berhasil diubah menjadi "Selesai".');
+                         } else {
+        return redirect()->route('admin.transaction.index')
+            ->with('error', 'Gagal memperbarui status transaksi');
+
+        }
+        // dd($updateSelesai);
+    }
+
+    /**
+     * AJAX search customers by name
+     */
+    public function searchCustomers(Request $request)
+    {
+        $search = $request->get('q');
+        
+        $customers = CustomerModel::where('nama', 'LIKE', "%{$search}%")
+            ->orWhere('no_telp', 'LIKE', "%{$search}%")
+            ->limit(10)
+            ->get(['id', 'nama', 'no_telp']);
+        
+        return response()->json($customers);
+    }
     
 }

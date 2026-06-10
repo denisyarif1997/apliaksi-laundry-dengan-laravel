@@ -23,6 +23,16 @@
                         <x-input-error :messages="$errors->get('name')" class="text-danger" />
                     </div>
                     <div class="input-group mb-3">
+                        <input id="company_name" class="form-control" type="text" name="company_name" :value="old('company_name')"
+                            required placeholder="Enter company name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-building"></span>
+                            </div>
+                        </div>
+                        <x-input-error :messages="$errors->get('company_name')" class="text-danger" />
+                    </div>
+                    <div class="input-group mb-3">
                         <input id="email" class="form-control" type="email" name="email" :value="old('email')"
                             required autocomplete="username" placeholder="Enter email address">
                         <div class="input-group-append">

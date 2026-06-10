@@ -86,7 +86,7 @@ class MesincuciController extends Controller
         $mesincuciData = MesinCuciModel::where('id',decrypt($mesincuci))->first();
         $mesincuciData->delete();
         
-        return redirect()->route('admin.mesincuci.index')->with('success','Mesin Cuci deleted successfully.');
+        return redirect()->route('admin.mesincuci.index')->with('error','Mesin Cuci deleted successfully.');
     }
 
     

@@ -1,14 +1,32 @@
 <x-admin>
     @section('title', 'Tambah Transaksi')
 
+    {{-- Add Select2 CSS --}}
+    @push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 38px;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 38px;
+            padding-left: 12px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px;
+        }
+    </style>
+    @endpush
+
     <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card card-primary shadow-sm">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title mb-0">Tambah Transaksi</h3>
-                        <a href="{{ route('admin.transaction.index') }}" class="btn btn-info btn-sm">Back</a>
-                        {{-- <i class="bi bi-arrow-left"></i> Back --}}
+                        <a href="{{ route('admin.transaction.index') }}" class="btn btn-info btn-sm">Back
                         </a>
                     </div>
 
@@ -16,15 +34,13 @@
                         @csrf
                         <div class="card-body">
 
-                            {{-- Customer --}}
+                            {{-- Customer with Select2 AJAX Search --}}
                             <div class="form-group mb-3">
                                 <label for="customer_id">Customer</label>
                                 <select name="customer_id" id="customer_id" class="form-control" required>
-                                    <option value="">-- Pilih Customer --</option>
-                                    @foreach ($customers as $customer)
-                                        <option value="{{ $customer->id }}">{{ $customer->nama }}</option>
-                                    @endforeach
+                                    <option value="">-- Ketik untuk mencari customer --</option>
                                 </select>
+                                <small class="text-muted">Ketik nama atau nomor telepon customer</small>
                                 @error('customer_id')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -74,8 +90,41 @@
         </div>
     </div>
 
-    {{-- Script untuk tambah/hapus layanan --}}
+    {{-- Add Select2 JS --}}
+    @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            // Initialize Select2 with AJAX
+            $('#customer_id').select2({
+                placeholder: '-- Ketik untuk mencari customer --',
+                allowClear: true,
+                ajax: {
+                    url: '{{ route("admin.search.customers") }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term // search term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function(customer) {
+                                return {
+                                    id: customer.id,
+                                    text: customer.nama + ' - ' + customer.no_telp
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2 // Minimum 2 karakter untuk mulai search
+            });
+        });
+
+        // Script untuk tambah/hapus layanan
         let index = 1;
         const wrapper = document.getElementById('service-wrapper');
 
@@ -104,4 +153,5 @@
             }
         });
     </script>
+    @endpush
 </x-admin>

@@ -32,15 +32,25 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'company_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $company = \App\Models\Company::create([
+            'name' => $request->company_name,
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ])->assignRole('user');
+            'company_id' => $company->id,
+        ]);
+        
+        $company->update(['owner_id' => $user->id]);
+
+        $user->assignRole('admin');
 
         event(new Registered($user));
 
