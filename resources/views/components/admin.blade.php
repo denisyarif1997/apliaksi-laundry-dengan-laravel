@@ -9,7 +9,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
     <title>@yield('title', 'Admin') | {{ config('app.name') }}</title>
 
     <!-- Google Font: Inter -->
@@ -230,6 +230,84 @@
         .dark-mode .main-header {
             background: rgba(31, 41, 55, 0.8);
         }
+
+        /* ===== Mobile Friendly (Responsive) ===== */
+        @media (max-width: 768px) {
+            /* Sidebar becomes overlay drawer on mobile */
+            .main-sidebar {
+                width: 260px !important;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1050;
+                position: fixed;
+                height: 100%;
+            }
+            body.sidebar-open .main-sidebar {
+                transform: translateX(0);
+            }
+            /* Dim background when sidebar open */
+            body.sidebar-open::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.45);
+                z-index: 1040;
+            }
+            .content-wrapper,
+            .main-footer {
+                margin-left: 0 !important;
+            }
+            /* Reduce content padding */
+            .content-header {
+                padding-top: 0.75rem;
+            }
+            .content {
+                padding: 0 0.5rem !important;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            /* Make cards full width */
+            .col-md-6, .col-md-8, .col-md-10, .col-md-12 {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            /* Tables scroll horizontally instead of breaking layout */
+            .table-responsive {
+                border: 0;
+            }
+            .table {
+                white-space: nowrap;
+            }
+            /* Bigger touch targets for buttons */
+            .btn {
+                padding: 0.55rem 1rem;
+            }
+            .main-header .navbar-nav .btn {
+                font-size: 0.85rem;
+            }
+            /* Stack navbar items */
+            .navbar-nav.ml-auto {
+                margin-left: auto !important;
+            }
+            /* Content header title smaller */
+            .content-header h1 {
+                font-size: 1.25rem;
+            }
+            /* Hide breadcrumb on very small screens to save space */
+            .content-header .col-sm-6:last-child {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-body {
+                padding: 0.75rem;
+            }
+            .btn {
+                font-size: 0.85rem;
+            }
+        }
     </style>
     
     @stack('styles')
@@ -358,6 +436,22 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
+
+        // Mobile sidebar toggle (overlay drawer)
+        $(document).ready(function() {
+            $('[data-widget="pushmenu"]').on('click', function(e) {
+                e.preventDefault();
+                $('body').toggleClass('sidebar-open');
+            });
+            // Close sidebar when clicking the dimmed overlay
+            $('body').on('click', function(e) {
+                if ($('body').hasClass('sidebar-open') &&
+                    !$(e.target).closest('.main-sidebar').length &&
+                    !$(e.target).closest('[data-widget="pushmenu"]').length) {
+                    $('body').removeClass('sidebar-open');
+                }
+            });
+        });
     </script>
     
     <x-alert />

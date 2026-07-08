@@ -4,11 +4,13 @@
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Outfit', sans-serif;
+            padding: 1rem;
+            box-sizing: border-box;
         }
 
         .login-container {
@@ -21,6 +23,15 @@
             max-width: 450px;
             padding: 2rem;
             animation: slideUp 0.5s ease-out;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 0.75rem; }
+            .login-container {
+                padding: 1.5rem 1.25rem;
+                border-radius: 18px;
+            }
+            .login-header h1 { font-size: 1.5rem; }
         }
 
         @keyframes slideUp {

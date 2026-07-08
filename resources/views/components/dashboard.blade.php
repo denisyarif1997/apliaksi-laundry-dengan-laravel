@@ -351,6 +351,22 @@
         .stats-value { font-size: 2rem; }
         .chart-card { padding: 20px; }
         .transactions-wrapper { padding: 20px; }
+        .quick-actions-grid { grid-template-columns: 1fr; }
+        .section-header h2 { font-size: 1.4rem; }
+        .chart-card-header h4 { font-size: 1.2rem; }
+        .transactions-header h4 { font-size: 1.2rem; }
+        .modern-table thead th { padding: 12px 14px; font-size: 0.65rem; }
+        .modern-table tbody td { padding: 14px; font-size: 0.85rem; }
+    }
+
+    @media (max-width: 480px) {
+        .stats-card .card-body { padding: 20px 18px; }
+        .stats-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+        .stats-icon i { font-size: 22px; }
+        .stats-value { font-size: 1.75rem; }
+        .action-card { padding: 18px; gap: 14px; }
+        .action-card-icon { width: 52px; height: 52px; }
+        .action-card-icon i { font-size: 22px; }
     }
 </style>
 
