@@ -31,7 +31,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Pelanggan
-                                <span class="badge badge-primary badge-sm right">{{ $CustomerCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -40,7 +39,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Layanan
-                                <span class="badge badge-info badge-sm right">{{ $ServicesCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -49,7 +47,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Barang
-                                <span class="badge badge-secondary badge-sm right">{{ $ItemCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -58,7 +55,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Mesin Laundry
-                                <span class="badge badge-success badge-sm right">{{ $MesinCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -71,7 +67,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Users
-                                <span class="badge badge-warning badge-sm right">{{ $userCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -80,7 +75,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Role
-                                <span class="badge badge-success badge-sm right">{{ $RoleCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -89,7 +83,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 permission
-                                <span class="badge badge-danger badge-sm right">{{ $PermissionCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -98,7 +91,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Backup Database
-                                <span class="badge badge-dark badge-sm right">{{ $BackupCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -120,7 +112,6 @@
                             <i class="far fa-circle nav-icon text-xs"></i>
                             <p>
                                 Semua Transaksi
-                                <span class="badge badge-success badge-sm right">{{ $TransactionCount }}</span>
                             </p>
                         </a>
                     </li>
@@ -133,9 +124,6 @@
                     <i class="nav-icon fas fa-chart-line"></i>
                     <p>
                         Laporan
-                        @if($ReportCount > 0)
-                        <span class="badge badge-warning badge-sm right">{{ $ReportCount }}</span>
-                        @endif
                     </p>
                 </a>
             </li>

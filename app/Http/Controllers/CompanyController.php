@@ -46,6 +46,7 @@ class CompanyController extends Controller
             'telephone' => 'required|string|max:20', // WhatsApp
             'address' => 'required|string|max:500',
             'footer_message' => 'nullable|string|max:500',
+            'maps_url' => 'nullable|url|max:500',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -80,6 +81,7 @@ class CompanyController extends Controller
             'telephone' => 'required|string|max:20', // WhatsApp
             'address' => 'required|string|max:500',
             'footer_message' => 'nullable|string|max:500',
+            'maps_url' => 'nullable|url|max:500',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 

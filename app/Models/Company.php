@@ -17,6 +17,7 @@ class Company extends Model
         'email',
         'logo',
         'footer_message',
+        'maps_url',
         'owner_id'
     ];
 

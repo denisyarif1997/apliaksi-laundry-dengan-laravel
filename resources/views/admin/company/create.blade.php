@@ -46,6 +46,14 @@
                 </div>
 
                 <div class="form-group mb-3">
+                    <label for="maps_url">URL Google Maps</label>
+                    <input type="url" name="maps_url" class="form-control @error('maps_url') is-invalid @enderror" id="maps_url" placeholder="Contoh: https://maps.google.com/?q=..." value="{{ old('maps_url') }}">
+                    @error('maps_url')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group mb-3">
                     <label for="logo">Logo Laundry</label>
                     <div class="custom-file">
                         <input type="file" name="logo" class="custom-file-input @error('logo') is-invalid @enderror" id="logo">

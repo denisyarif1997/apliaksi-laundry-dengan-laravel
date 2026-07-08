@@ -74,7 +74,7 @@
     <table class="table" style="font-size: 11px;">
         @foreach($transaction->details as $detail)
         <tr>
-            <td colspan="3" class="fw-bold">{{ $detail->service->nama_paket }}</td>
+            <td colspan="3" class="fw-bold">{{ $detail->service->nama_layanan }}</td>
         </tr>
         <tr>
             <td>{{ $detail->berat }} Kg x Rp {{ number_format($detail->service->harga_per_kg, 0, ',', '.') }}</td>
@@ -110,6 +110,14 @@
     <div class="text-center" style="font-size: 10px;">
         {{ $company->footer_message ?? 'Terimakasih atas kepercayaan Anda.' }}
     </div>
+
+    @if($company->maps_url)
+    <div class="text-center mt-3">
+        <div style="font-size: 11px; font-weight: bold; margin-bottom: 4px;">Lokasi Laundry</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{ urlencode($company->maps_url) }}" alt="QR Lokasi" style="width: 100px; height: 100px;">
+        <div style="font-size: 9px; margin-top: 2px;">Scan untuk membuka Google Maps</div>
+    </div>
+    @endif
 
 </body>
 </html>

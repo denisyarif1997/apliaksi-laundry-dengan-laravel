@@ -49,7 +49,7 @@
                             {{-- Tanggal Masuk --}}
                             <div class="form-group mb-3">
                                 <label>Tanggal Masuk</label>
-                                <input type="datetime-local" name="tanggal_masuk" class="form-control" required>
+                                <input type="datetime-local" name="tanggal_masuk" id="tanggal_masuk" class="form-control" required>
                                 @error('tanggal_masuk')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -152,6 +152,18 @@
                 }
             }
         });
+
+        // Auto isi Tanggal Masuk dengan waktu aktual saat ini (masih bisa diubah)
+        (function () {
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            const local = now.getFullYear() + '-' +
+                pad(now.getMonth() + 1) + '-' +
+                pad(now.getDate()) + 'T' +
+                pad(now.getHours()) + ':' +
+                pad(now.getMinutes());
+            document.getElementById('tanggal_masuk').value = local;
+        })();
     </script>
     @endpush
 </x-admin>
